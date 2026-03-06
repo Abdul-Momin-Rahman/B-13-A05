@@ -31,8 +31,140 @@
 
 <body>
 
-    <p>Hello World!</p>
+    <header>
+        <nav>
+            <div class="navbar bg-base-100 shadow-sm px-20 py-4">
+                <div class="flex-1">
+                    <a class="btn btn-ghost text-2xl text-[#1F2937] font-semibold px-0"><img class="w-9"
+                            src="./assets/github-logo.png" alt="">GitHub Issues Tracker</a>
+                </div>
+                <div class="flex gap-4">
+                    <label class="input">
+                        <svg class="h-4 opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                                stroke="currentColor">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.3-4.3"></path>
+                            </g>
+                        </svg>
+                        <input type="search" class="grow" placeholder="Search issues..." />
+                    </label>
+                    <button class="btn  btn-primary font-semibold text-white"><i class="fa-solid fa-plus"></i> New
+                        Issue</button>
+                </div>
+            </div>
+        </nav>
+    </header>
 
+    <main class="min-h-screen bg-[#F8FAFC]">
+
+        <section class="w-9/12 mx-auto py-15">
+
+            <!-- tabs -->
+            <div class="p-6 bg-white shadow-xs flex gap-2 mb-4 rounded-xl">
+                <button class="btn btn-primary px-3 py-2 font-semibold w-30">All</button>
+                <button class="btn btn-outline px-3 py-2 font-semibold w-30">Open</button>
+                <button class="btn btn-outline px-3 py-2 font-semibold w-30">Closed</button>
+            </div>
+
+            <!-- Below the tab -->
+            <div class="bg-white p-6 rounded-t-xl border-b border-gray-300 shadow-xl">
+
+                <div class="flex justify-between">
+
+                    <div class="flex justify-center items-center gap-2">
+
+                        <div class="bg-[#ECE4FF] w-12 h-12 flex justify-center items-center rounded-full">
+                            <div class="w-8">
+                                <img src="./assets/Aperture.png" alt="">
+                            </div>
+                        </div>
+
+                        <div>
+                            <h1 class="text-xl text-[#1F2937] font-semibold">50 Issues</h1>
+                            <p class="text-[#64748B]">Track and manage your project issues</p>
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-between gap-4">
+
+                        <div class="flex gap-2 justify-center items-center">
+                            <div class="bg-[#00A96E] rounded-full w-3 h-3"></div>
+                            <p class="text-[#1F2937] font-medium">Open</p>
+                        </div>
+
+                        <div class="flex gap-2 justify-center items-center">
+                            <div class="bg-[#A855F7] rounded-full w-3 h-3"></div>
+                            <p class="text-[#1F2937] font-medium">Closed</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+            <!-- all issues -->
+            <div id="issues-container" class="p-6 bg-[#FBFBFB] rounded-b-xl shadow-xl grid grid-cols-4 gap-5">
+
+                <div id="card" class=" bg-white rounded-lg border-t-4 border-[#00A96E] shadow-lg">
+
+                    <!-- TOP part -->
+                    <div class="top border-b border-gray-100 p-4">
+                        <!-- top -->
+                        <div class="flex justify-between">
+                            <img src="./assets/Open-Status.png" alt="">
+                            <p  id="priority"
+                                class="bg-[#FEECEC] text-[#EF4444] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center">
+                                HIGH</p>
+                            <p  id="priority"
+                                class="bg-[#FFF6D1] text-[#F59E0B] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center">
+                                MEDIUM</p>
+                            <p  id="priority"
+                                class="bg-[#EEEFF2] text-[#9CA3AF] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center">
+                                LOW</p>
+                        </div>
+
+                        <!-- middle -->
+                        <div class="flex flex-col gap-2 mt-3">
+                            <h2 class="text-[#1F2937] font-semibold text-sm">Fix navigation menu on mobile devices</h2>
+                            <p class="text-[#64748B] font-normal text-xs">The navigation menu doesn't collapse properly
+                                on mobile devices...</p>
+                        </div>
+
+                        <!-- end -->
+                        <div class="flex gap-1 mt-3">
+                            <p
+                                class="bg-[#FEECEC] text-[#EF4444] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center border border-[#FECACA]">
+                                BUG</p>
+                            <p
+                                class="bg-[#FFF8DB] text-[#D97706] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center border border-[#FDE68A]">
+                                HELP WANTED</p>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Part -->
+                    <div class="p-4 flex flex-col gap-2">
+                        <p class="font-normal text-xs text-[#64748B]"><span>#1</span>
+                            by john_doe</p>
+                        <p class="font-normal text-xs text-[#64748B]">1/15/2024</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </section>
+
+    </main>
+
+
+    <script src="./script.js"></script>
 </body>
 
 </html>
