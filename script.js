@@ -18,6 +18,18 @@ const loadIssues = async () => {
     displayIssues(data.data);
 }
 
+const changingTabs = (clickedBtn) => {
+    alltabs = document.querySelectorAll('.tabButton')
+
+    alltabs.forEach(tab => {
+        tab.classList.remove('btn-primary');
+        tab.classList.add('btn-outline');
+    });
+
+    clickedBtn.classList.remove('btn-outline');
+    clickedBtn.classList.add('btn-primary');
+}
+
 const displayIssues = (datalist) => {
     const issueContainer = document.getElementById('issues-container');
     issueContainer.innerHTML = "";
@@ -25,9 +37,14 @@ const displayIssues = (datalist) => {
 
     datalist.forEach(data => {
 
+        
         const card = document.createElement('div');
-        card.className = " bg-white rounded-lg border-t-4 border-[#00A96E] shadow-lg";
 
+        const StatusIsOpen = data.status == 'open';
+        
+        card.className = `bg-white rounded-lg border-t-4 border-[#${StatusIsOpen ? "00A96E": "A855F7"}] shadow-lg`;
+        
+        
         if (data.priority == 'high') {
             priorityText = 'HIGH';
             classList = 'bg-[#FEECEC] text-[#EF4444]';
@@ -43,12 +60,14 @@ const displayIssues = (datalist) => {
 
         const labels = data.labels;
 
+
+
         card.innerHTML = `
          <!-- TOP part -->
                     <div class="top border-b border-gray-100 p-4">
                         <!-- top -->
                         <div class="flex justify-between">
-                            <img src="./assets/${data.status == 'open' ? 'Open-Status.png' : 'Closed-Status.png'}" alt="">
+                            <img src="./assets/${StatusIsOpen ? 'Open-Status.png' : 'Closed-Status.png'}" alt="">
                             <p  id="priority"
                                 class="${classList} text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center">
                                 ${priorityText}</p>
@@ -76,7 +95,6 @@ const displayIssues = (datalist) => {
                         <p class="font-normal text-xs text-[#64748B]">${data.createdAt.slice(0, 10)}</p>
                     </div>
         `
-
 
 
         issueContainer.append(card);
