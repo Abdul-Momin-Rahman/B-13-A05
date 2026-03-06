@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+
+    <!-- Tailwind + DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- ICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+    <style>
+        * {
+            font-family: "Geist", sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#F8FAFC] min-h-screen flex flex-col justify-center items-center">
+
+    <section class="bg-[#ffffff] w-full max-w-lg mx-auto  min-h-9/12  p-8 space-y-6 rounded-2xl shadow-xl">
+
+        <div class="flex flex-col items-center">
+
+            <div class="w-fit">
+                <img src="./assets/github-logo.png" alt="">
+            </div>
+
+            <h2 class="font-semibold text-2xl text-[#1F2937]">
+                GitHub Issues Tracker
+            </h2>
+
+            <p class="text-[#64748B]">
+                Sign in to manage your issues
+            </p>
+
+        </div>
+
+    
+        <fieldset class="fieldset  p-4 space-y-4">
+
+            <div class="space-y-1.5">
+                <label class="label text-[#1F2937] text-base font-medium">Username</label>
+                <input type="text" class="input w-full" placeholder="Enter Username" />
+
+            </div>
+
+
+            <div class="space-y-1.5">
+                <label class="label text-[#1F2937] text-base font-medium">Password</label>
+                <input type="password" class="input w-full" placeholder="Enter Password" />
+                
+            </div>
+
+            <button class="btn btn-primary mt-4">Sign In</button>
+        </fieldset>
+
+        <!-- <hr> -->
+
+        <div class="flex justify-between items-center">
+
+            <hr class="w-full border-b text-[#E4E4E7]">
+
+        </div>
+
+    </section>
+
+
+
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
