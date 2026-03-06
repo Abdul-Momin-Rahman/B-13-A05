@@ -22,7 +22,6 @@ const displayIssues = (datalist) => {
     const issueContainer = document.getElementById('issues-container');
     issueContainer.innerHTML = "";
 
-    let labelsarray = [];
 
     datalist.forEach(data => {
 
@@ -42,13 +41,7 @@ const displayIssues = (datalist) => {
             classList = 'bg-[#EEEFF2] text-[#9CA3AF]';
         }
 
-
-        data.labels.forEach(label => {
-            if (!labelsarray.includes(label)) {
-                labelsarray.push(label);
-            }
-
-        });
+        const labels = data.labels;
 
         card.innerHTML = `
          <!-- TOP part -->
@@ -68,13 +61,12 @@ const displayIssues = (datalist) => {
                         </div>
 
                         <!-- end -->
-                        <div class="flex gap-1 mt-3">
-                            <p
-                                class="bg-[#FEECEC] text-[#EF4444] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center border border-[#FECACA]">
-                                BUG</p>
-                            <p
-                                class="bg-[#FFF8DB] text-[#D97706] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center border border-[#FDE68A]">
-                                HELP WANTED</p>
+                        <div id="label-container" class="flex gap-1 mt-3">
+                            ${labels.map(label => `
+                                <p
+                                class="bg-[#FEF3C7] text-[#B45309] text-xs font-medium px-1 py-1 rounded-xl flex justify-between items-center border border-[#FDE68A]">
+                                ${label}</p>
+                                `).join('')}
                         </div>
                     </div>
 
@@ -85,11 +77,13 @@ const displayIssues = (datalist) => {
                     </div>
         `
 
+
+
         issueContainer.append(card);
 
     });
 
-    console.log(labelsarray);
+
 }
 
 loadIssues();
