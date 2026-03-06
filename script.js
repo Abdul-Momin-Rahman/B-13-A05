@@ -11,15 +11,37 @@ const loginVerify = () => {
     }
 }
 
+const openIssue = [];
+const closedIssue = [];
+const AllIssue = [];
 
 const loadIssues = async () => {
     const response = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const data = await response.json();
-    displayIssues(data.data);
+    data.data.forEach(data => {
+
+        const StatusIsOpen = data.status == 'open';
+
+        if (StatusIsOpen) {
+            openIssue.push(data);
+        }
+        else {
+            closedIssue.push(data);
+        }
+
+        AllIssue.push(data);
+
+    });
+
+    displayIssues(AllIssue);
 }
 
+alltabs = document.querySelectorAll('.tabButton');
+
+const issueCount = document.getElementById('issue-count');
+const issuesContainer = document.getElementById('issues-container');
+
 const changingTabs = (clickedBtn) => {
-    alltabs = document.querySelectorAll('.tabButton')
 
     alltabs.forEach(tab => {
         tab.classList.remove('btn-primary');
@@ -28,6 +50,20 @@ const changingTabs = (clickedBtn) => {
 
     clickedBtn.classList.remove('btn-outline');
     clickedBtn.classList.add('btn-primary');
+
+    if (clickedBtn.innerText == 'Open') {
+        displayIssues(openIssue);
+        issueCount.innerText = openIssue.length;
+    }
+    else if (clickedBtn.innerText == 'Closed') {
+        displayIssues(closedIssue);
+        issueCount.innerText = closedIssue.length;
+    }
+    else if(clickedBtn.innerText == 'All'){
+        displayIssues(AllIssue);
+        issueCount.innerText = AllIssue.length;
+    }
+    
 }
 
 const displayIssues = (datalist) => {
@@ -37,14 +73,14 @@ const displayIssues = (datalist) => {
 
     datalist.forEach(data => {
 
-        
+
         const card = document.createElement('div');
 
         const StatusIsOpen = data.status == 'open';
-        
-        card.className = `bg-white rounded-lg border-t-4 border-[#${StatusIsOpen ? "00A96E": "A855F7"}] shadow-lg`;
-        
-        
+
+        card.className = `bg-white rounded-lg border-t-4 border-[#${StatusIsOpen ? "00A96E" : "A855F7"}] shadow-lg`;
+
+
         if (data.priority == 'high') {
             priorityText = 'HIGH';
             classList = 'bg-[#FEECEC] text-[#EF4444]';
@@ -101,7 +137,7 @@ const displayIssues = (datalist) => {
 
     });
 
-
+    // console.log(openIssue, closedIssue);
 }
 
 loadIssues();
