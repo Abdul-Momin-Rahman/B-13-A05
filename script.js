@@ -18,7 +18,7 @@ const AllIssue = [];
 const showSpinner = () => {
     const Spinner = document.getElementById('spinner');
     const issuesContainer = document.getElementById('issues-container');
-    
+
     Spinner.classList.remove('hidden');
     issuesContainer.classList.add('hidden');
 
@@ -32,20 +32,21 @@ const hideSpinner = () => {
     Spinner.classList.add('hidden');
 }
 
-const searchIssue = ()=> {
+const searchIssue = () => {
 
     const inputSearch = document.getElementById('input-search');
     const input = inputSearch.value.trim().toLowerCase();
 
     const issueCount = document.getElementById('issue-count');
-    
+
     const searchUrl = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${input}`;
     fetch(searchUrl)
-    .then(response => response.json())
-    .then(results => {
-        displayIssues(results.data)
-        issueCount.innerText = results.data.length; 
-    }) 
+        .then(response => response.json())
+        .then(results => {
+            removeActive()
+            displayIssues(results.data)
+            issueCount.innerText = results.data.length;
+        })
 }
 
 const loadIssues = async () => {
@@ -71,15 +72,21 @@ const loadIssues = async () => {
     hideSpinner();
 }
 
-const changingTabs = (clickedBtn) => {
+const removeActive = () => {
 
     alltabs = document.querySelectorAll('.tabButton');
-    const issueCount = document.getElementById('issue-count');
-
     alltabs.forEach(tab => {
         tab.classList.remove('btn-primary');
         tab.classList.add('btn-outline');
     });
+}
+
+const changingTabs = (clickedBtn) => {
+
+
+    const issueCount = document.getElementById('issue-count');
+
+    removeActive();
 
     clickedBtn.classList.remove('btn-outline');
     clickedBtn.classList.add('btn-primary');
