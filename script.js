@@ -17,8 +17,9 @@ const AllIssue = [];
 
 const loadIssues = async () => {
     const response = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
-    const data = await response.json();
-    data.data.forEach(data => {
+    const Json = await response.json();
+    const data = Json.data;
+    data.forEach(data => {
 
         const StatusIsOpen = data.status == 'open';
 
@@ -36,12 +37,10 @@ const loadIssues = async () => {
     displayIssues(AllIssue);
 }
 
-alltabs = document.querySelectorAll('.tabButton');
-
-const issueCount = document.getElementById('issue-count');
-const issuesContainer = document.getElementById('issues-container');
-
 const changingTabs = (clickedBtn) => {
+
+    alltabs = document.querySelectorAll('.tabButton');
+    const issueCount = document.getElementById('issue-count');
 
     alltabs.forEach(tab => {
         tab.classList.remove('btn-primary');
@@ -59,11 +58,108 @@ const changingTabs = (clickedBtn) => {
         displayIssues(closedIssue);
         issueCount.innerText = closedIssue.length;
     }
-    else if(clickedBtn.innerText == 'All'){
+    else if (clickedBtn.innerText == 'All') {
         displayIssues(AllIssue);
         issueCount.innerText = AllIssue.length;
     }
-    
+
+}
+
+const loadAllInfo = async (id) => {
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+    const response = await fetch(url);
+    const Json = await response.json();
+    displayAllInfo(Json.data);
+}
+
+//  "data": {
+//     "id": 1,
+//     "title": "Fix navigation menu on mobile devices",
+//     "description": "The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.",
+//     "status": "open",
+//     "labels": [
+//       "bug",
+//       "help wanted"
+//     ],
+//     "priority": "high",
+//     "author": "john_doe",
+//     "assignee": "jane_smith",
+//     "createdAt": "2024-01-15T10:30:00Z",
+//     "updatedAt": "2024-01-15T10:30:00Z"
+//   }
+
+const displayAllInfo = (data) => {
+
+
+    const allInfoContainer = document.getElementById('all-info-container');
+
+     if (data.priority == 'high') {
+            priorityText = 'HIGH';
+            classList = 'bg-[#FEECEC] text-[#EF4444]';
+        }
+        else if (data.priority == 'medium') {
+            priorityText = 'MEDIUM';
+            classList = 'bg-[#FFF6D1] text-[#F59E0B]';
+        }
+        else if (data.priority == 'low') {
+            priorityText = 'LOW';
+            classList = 'bg-[#EEEFF2] text-[#9CA3AF]';
+        }
+        
+    allInfoContainer.innerHTML = ` <div class="p-8">
+
+                        <div class="space-y-4">
+                            <h2 class="font-bold text-2xl text-[#1F2937]">${data.title}</h2>
+                            <div class="flex items-center gap-2">
+                                <p class="bg-[#${data.status == 'open' ? '00A96E' : 'A855F7'}] text-white text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center]">${data.status}</p>
+
+                                <p class="w-1.5 h-1.5 bg-gray-500 rounded-full"></p>
+                                <p class="text-xs text-[#64748B]">Opened by ${data.author}</p>
+                                <p class="w-1.5 h-1.5 bg-gray-500 rounded-full"></p>
+                                <p class="text-xs text-[#64748B]">${data.createdAt.slice(0, 10)}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-1 mt-6">
+                            <div id="label-container" class="flex gap-1 mt-3">
+                            ${data.labels.map(label => `
+                                <p
+                                class="bg-[#FEF3C7] text-[#B45309] text-xs font-medium px-1 py-1 rounded-xl flex justify-between items-center border border-[#FDE68A]">
+                                ${label}</p>
+                                `).join('')}
+                        </div>
+                        </div>
+
+                        <div>
+                            <p class="text-[#64748B] font-normal text-base my-6">${data.description}</p>
+                        </div>
+
+                        <div class="bg-[#F8FAFC] flex justify-between p-4 gap-2.5 rounded-2xl">
+                            <div class="space-y-2">
+                                <div class="text-[#64748B] font-normal text-base">Assignee:</div>
+                                <div class="font-bold text-[#1F2937]">${data.assignee? data.assignee : "Not Found!"}</div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <div class="text-[#64748B] font-normal text-base">
+                                    Priority
+                                </div>
+                                <p  id="priority"
+                                class="${classList} text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center">
+                                ${priorityText}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn btn-primary">Close</button>
+                        </form>
+                    </div>`;
+
+
+    document.getElementById('showAllInfo').showModal();
 }
 
 const displayIssues = (datalist) => {
@@ -78,7 +174,7 @@ const displayIssues = (datalist) => {
 
         const StatusIsOpen = data.status == 'open';
 
-        card.className = `bg-white rounded-lg border-t-4 border-[#${StatusIsOpen ? "00A96E" : "A855F7"}] shadow-lg`;
+        card.className = `bg-white rounded-lg border-t-4 border-[#${StatusIsOpen ? "00A96E" : "A855F7"}] shadow-lg cursor-pointer`;
 
 
         if (data.priority == 'high') {
@@ -100,7 +196,7 @@ const displayIssues = (datalist) => {
 
         card.innerHTML = `
          <!-- TOP part -->
-                    <div class="top border-b border-gray-100 p-4">
+                    <div onclick="loadAllInfo(${data.id})" class="top border-b border-gray-100 p-4">
                         <!-- top -->
                         <div class="flex justify-between">
                             <img src="./assets/${StatusIsOpen ? 'Open-Status.png' : 'Closed-Status.png'}" alt="">
@@ -137,8 +233,9 @@ const displayIssues = (datalist) => {
 
     });
 
-    // console.log(openIssue, closedIssue);
 }
+
+
 
 loadIssues();
 
