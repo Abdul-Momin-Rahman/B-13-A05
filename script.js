@@ -34,24 +34,34 @@ const hideSpinner = () => {
 
 const searchIssue = () => {
 
+    currentBtn = '';
+
     const inputSearch = document.getElementById('input-search');
     const input = inputSearch.value.trim().toLowerCase();
 
-    if(input.length > 0){
+    if (input.length > 0) {
 
-        const issueCount = document.getElementById('issue-count');
-    
-        const searchUrl = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${input}`;
+        showSpinner();
 
-        fetch(searchUrl)
-            .then(response => response.json())
-            .then(results => {
-                removeActive()
-                displayIssues(results.data)
-                issueCount.innerText = results.data.length;
-            })
+        setTimeout(() => {
+
+            const issueCount = document.getElementById('issue-count');
+
+            const searchUrl = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${input}`;
+
+            fetch(searchUrl)
+                .then(response => response.json())
+                .then(results => {
+                    removeActive();
+                    hideSpinner();
+                    displayIssues(results.data)
+                    issueCount.innerText = results.data.length;
+                })
+
+
+        }, 500)
     }
-    else{
+    else {
         alert('Search Box is Empty, Try again!')
     }
 
@@ -89,6 +99,8 @@ const removeActive = () => {
     });
 }
 
+
+let currentBtn = 'All';
 const changingTabs = (clickedBtn) => {
 
 
@@ -99,41 +111,56 @@ const changingTabs = (clickedBtn) => {
     clickedBtn.classList.remove('btn-outline');
     clickedBtn.classList.add('btn-primary');
 
-    if (clickedBtn.innerText == 'Open') {
-        showSpinner();
+    if (clickedBtn.innerText == 'Open' && currentBtn != 'Open') {
 
+        showSpinner();
+        currentBtn = 'Open';
         setTimeout(() => {
             displayIssues(openIssue);
             issueCount.innerText = openIssue.length;
             hideSpinner();
-        }, 1000);
+        }, 500);
     }
-    else if (clickedBtn.innerText == 'Closed') {
-        showSpinner();
+    else if (clickedBtn.innerText == 'Closed' && currentBtn != 'Closed') {
 
+        showSpinner();
+        currentBtn = 'Closed';
         setTimeout(() => {
             displayIssues(closedIssue);
             issueCount.innerText = closedIssue.length;
             hideSpinner();
-        }, 1000);
+        }, 500);
     }
-    else if (clickedBtn.innerText == 'All') {
-        showSpinner();
+    else if (clickedBtn.innerText == 'All' && currentBtn != 'All') {
 
+        showSpinner();
+        currentBtn = 'All';
         setTimeout(() => {
             displayIssues(AllIssue);
             issueCount.innerText = AllIssue.length;
             hideSpinner();
-        }, 1000);
+        }, 500);
     }
 
 }
 
-const loadAllInfo = async (id) => {
-    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
-    const response = await fetch(url);
-    const Json = await response.json();
-    displayAllInfo(Json.data);
+
+const loadAllInfo = (id) => {
+
+    const modalLoader = document.getElementById('modalLoader');
+    modalLoader.classList.remove('hidden');
+
+    setTimeout(() => {
+
+        const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(Json => {
+                modalLoader.classList.add('hidden');
+                displayAllInfo(Json.data);
+            })
+    }, 200);
+
 }
 
 const displayAllInfo = (data) => {

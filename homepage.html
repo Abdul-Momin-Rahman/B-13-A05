@@ -52,7 +52,8 @@
                         </svg>
                         <input id="input-search" type="search" class="w-15 md:w-full" placeholder="Search issues..." />
                     </label>
-                    <button onclick="searchIssue()" class="btn  btn-primary text-xs md:text-base font-semibold text-white">Search</button>
+                    <button onclick="searchIssue()"
+                        class="btn  btn-primary text-xs md:text-base font-semibold text-white">Search</button>
                 </div>
             </div>
         </nav>
@@ -62,7 +63,7 @@
 
         <section class="w-full md:w-11/12 lg:w-9/12 mx-auto py-15">
 
-            <!-- tabs --> 
+            <!-- tabs -->
             <div class="p-2 lg:p-6 bg-white shadow-xs flex justify-center lg:justify-start gap-2 mb-4 rounded-xl">
                 <button onclick="changingTabs(this)"
                     class="tabButton btn btn-primary px-3 py-2 font-semibold w-20 md:w-30">All</button>
@@ -126,8 +127,8 @@
             <!-- Modal -->
             <!-- Open the modal using ID.showModal() method -->
 
-            <dialog id="showAllInfo" class="modal modal-bottom sm:modal-middle">
-                <div class="modal-box px-8 py- m-2 bg-white rounded-3xl " id="all-info-container">
+            <dialog id="showAllInfo" class="modal bg-black/50 modal-bottom sm:modal-middle">
+                <div class="modal-box px-8 py- m-2 bg-white rounded-3xl" id="all-info-container">
                     <!-- Modal body will be here -->
                 </div>
             </dialog>
@@ -135,11 +136,18 @@
         </section>
 
         <div id="spinner" class="flex justify-center">
-            <span class="loading loading-ring loading-xs"></span>
-            <span class="loading loading-ring loading-sm"></span>
-            <span class="loading loading-ring loading-md"></span>
-            <span class="loading loading-ring loading-lg"></span>
-            <span class="loading loading-ring loading-xl"></span>
+            <span class="loading loading-spinner loading-xl"></span>
+        </div>
+
+
+        <div id="modalLoader"
+            class="flex justify-center items-center min-h-screen  fixed inset-0 bg-black/50 z-50 hidden">
+            <div class="flex w-72 flex-col gap-4">
+                <div class="skeleton h-32 w-full"></div>
+                <div class="skeleton h-4 w-28"></div>
+                <div class="skeleton h-4 w-full"></div>
+                <div class="skeleton h-4 w-full"></div>
+            </div>
         </div>
 
     </main>
