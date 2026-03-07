@@ -31,16 +31,19 @@
 
 <body>
 
-    <header>
+    <header class="sticky top-0">
         <nav>
             <div class="navbar bg-base-100 shadow-sm px-2 lg:px-20 py-4">
                 <div class="flex-1">
-                    <a class="btn btn-ghost text-xl md:text-2xl text-[#1F2937] font-semibold px-0"><img class="w-9"
-                            src="./assets/github-logo.png" alt="">GitHub Issues Tracker</a>
+                    <a
+                        class="flex justify-start items-center gap-2 text-xl md:text-2xl text-[#1F2937] font-semibold px-0"><img
+                            class="w-9  " src="./assets/github-logo.png" alt=""><span class="hidden sm:flex">GitHub
+                            Issues Tracker</span></a>
                 </div>
                 <div class="flex gap-4">
                     <label class="input">
-                        <svg class="h-3 md:h-4 opacity-50 w-3 md:w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <svg class="h-3 md:h-4 opacity-50 w-3 md:w-4" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24">
                             <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
                                 stroke="currentColor">
                                 <circle cx="11" cy="11" r="8"></circle>
@@ -83,7 +86,8 @@
                         </div>
 
                         <div>
-                            <h1 class="text-sm md:text-xl text-[#1F2937] font-semibold"><span id="issue-count">50</span> Issues
+                            <h1 class="text-sm md:text-xl text-[#1F2937] font-semibold"><span id="issue-count">50</span>
+                                Issues
                             </h1>
                             <p class="text-[#64748B] text-xs md:text-base">Track and manage your project issues</p>
                         </div>
@@ -114,115 +118,29 @@
             <div id="issues-container"
                 class="p-2 lg:p-6 bg-[#FBFBFB] rounded-b-xl shadow-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-3 lg:gap-5">
 
-                <div id="card" class=" bg-white rounded-lg border-t-4 border-[#00A96E] shadow-lg">
-
-                    <!-- TOP part -->
-                    <div class="top border-b border-gray-100 p-4">
-                        <!-- top -->
-                        <div class="flex justify-between">
-                            <img src="./assets/Open-Status.png" alt="">
-                            <p id="priority"
-                                class="bg-[#FEECEC] text-[#EF4444] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center">
-                                HIGH</p>
-                            <p id="priority"
-                                class="bg-[#FFF6D1] text-[#F59E0B] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center">
-                                MEDIUM</p>
-                            <p id="priority"
-                                class="bg-[#EEEFF2] text-[#9CA3AF] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center">
-                                LOW</p>
-                        </div>
-
-                        <!-- middle -->
-                        <div class="flex flex-col gap-2 mt-3">
-                            <h2 class="text-[#1F2937] font-semibold text-sm">Fix navigation menu on mobile devices</h2>
-                            <p class="text-[#64748B] font-normal text-xs">The navigation menu doesn't collapse properly
-                                on mobile devices...</p>
-                        </div>
-
-                        <!-- end -->
-                        <div class="flex gap-1 mt-3">
-                            <p
-                                class="bg-[#FEECEC] text-[#EF4444] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center border border-[#FECACA]">
-                                BUG</p>
-                            <p
-                                class="bg-[#FFF8DB] text-[#D97706] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center border border-[#FDE68A]">
-                                HELP WANTED</p>
-                        </div>
-                    </div>
-
-                    <!-- Bottom Part -->
-                    <div class="p-4 flex flex-col gap-2">
-                        <p class="font-normal text-xs text-[#64748B]"><span>#1</span>
-                            by john_doe</p>
-                        <p class="font-normal text-xs text-[#64748B]">1/15/2024</p>
-                    </div>
-
-                </div>
+                <!-- card will be here -->
 
             </div>
 
 
             <!-- Modal -->
             <!-- Open the modal using ID.showModal() method -->
-            <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+
             <dialog id="showAllInfo" class="modal modal-bottom sm:modal-middle">
-                <div class="modal-box space-y-6" id="all-info-container">
-
-                    <div class="p-8">
-
-                        <div class="space-y-4">
-                            <h2 class="font-bold text-2xl text-[#1F2937]">Fix broken image uploads</h2>
-                            <div class="flex items-center gap-2">
-                                <p class="bg-[#00A96E] text-white text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center]">Opened</p>
-
-                                <p class="w-1.5 h-1.5 bg-gray-500 rounded-full"></p>
-                                <p class="text-xs text-[#64748B]">Opened by Fahim Ahmed</p>
-                                <p class="w-1.5 h-1.5 bg-gray-500 rounded-full"></p>
-                                <p class="text-xs text-[#64748B]">22/02/2026</p>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-1 mt-6">
-                            <p
-                                class="bg-[#FEECEC] text-[#EF4444] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center border border-[#FECACA]">
-                                BUG</p>
-                            <p
-                                class="bg-[#FFF8DB] text-[#D97706] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center border border-[#FDE68A]">
-                                HELP WANTED</p>
-                        </div>
-
-                        <div>
-                            <p class="text-[#64748B] font-normal text-base my-6">The navigation menu doesn't collapse properly on mobile devices. Need to fix the
-                                responsive behavior.</p>
-                        </div>
-
-                        <div class="bg-[#F8FAFC] flex justify-between p-4 gap-2.5 rounded-2xl">
-                            <div class="space-y-2">
-                                <div class="text-[#64748B] font-normal text-base">Assignee:</div>
-                                <div class="font-bold text-[#1F2937]">Fahim Ahmed</div>
-                            </div>
-
-                            <div class="space-y-2">
-                                <div class="text-[#64748B] font-normal text-base">
-                                    Priority
-                                </div>
-                                <div class="bg-[#FEECEC] text-[#EF4444] text-xs font-medium px-5 py-1 rounded-4xl flex justify-between items-center"">
-                                    HIGH
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-action">
-                        <form method="dialog">
-                            <!-- if there is a button in form, it will close the modal -->
-                            <button class="btn btn-primary">Close</button>
-                        </form>
-                    </div>
+                <div class="modal-box px-8 py- m-2 bg-white rounded-3xl " id="all-info-container">
+                    <!-- Modal body will be here -->
                 </div>
             </dialog>
 
         </section>
+
+        <div id="spinner" class="flex justify-center">
+            <span class="loading loading-ring loading-xs"></span>
+            <span class="loading loading-ring loading-sm"></span>
+            <span class="loading loading-ring loading-md"></span>
+            <span class="loading loading-ring loading-lg"></span>
+            <span class="loading loading-ring loading-xl"></span>
+        </div>
 
     </main>
 

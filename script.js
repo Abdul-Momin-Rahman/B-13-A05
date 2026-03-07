@@ -15,7 +15,25 @@ const openIssue = [];
 const closedIssue = [];
 const AllIssue = [];
 
+const showSpinner = () => {
+    const Spinner = document.getElementById('spinner');
+    const issuesContainer = document.getElementById('issues-container');
+    
+    Spinner.classList.remove('hidden');
+    issuesContainer.classList.add('hidden');
+
+}
+
+const hideSpinner = () => {
+    const Spinner = document.getElementById('spinner');
+    const issuesContainer = document.getElementById('issues-container');
+
+    issuesContainer.classList.remove('hidden');
+    Spinner.classList.add('hidden');
+}
+
 const loadIssues = async () => {
+    showSpinner();
     const response = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const Json = await response.json();
     const data = Json.data;
@@ -33,8 +51,8 @@ const loadIssues = async () => {
         AllIssue.push(data);
 
     });
-
     displayIssues(AllIssue);
+    hideSpinner();
 }
 
 const changingTabs = (clickedBtn) => {
@@ -51,16 +69,31 @@ const changingTabs = (clickedBtn) => {
     clickedBtn.classList.add('btn-primary');
 
     if (clickedBtn.innerText == 'Open') {
-        displayIssues(openIssue);
-        issueCount.innerText = openIssue.length;
+        showSpinner();
+
+        setTimeout(() => {
+            displayIssues(openIssue);
+            issueCount.innerText = openIssue.length;
+            hideSpinner();
+        }, 2000);
     }
     else if (clickedBtn.innerText == 'Closed') {
-        displayIssues(closedIssue);
-        issueCount.innerText = closedIssue.length;
+        showSpinner();
+
+        setTimeout(() => {
+            displayIssues(closedIssue);
+            issueCount.innerText = closedIssue.length;
+            hideSpinner();
+        }, 2000);
     }
     else if (clickedBtn.innerText == 'All') {
-        displayIssues(AllIssue);
-        issueCount.innerText = AllIssue.length;
+        showSpinner();
+
+        setTimeout(() => {
+            displayIssues(AllIssue);
+            issueCount.innerText = AllIssue.length;
+            hideSpinner();
+        }, 2000);
     }
 
 }
@@ -72,41 +105,27 @@ const loadAllInfo = async (id) => {
     displayAllInfo(Json.data);
 }
 
-//  "data": {
-//     "id": 1,
-//     "title": "Fix navigation menu on mobile devices",
-//     "description": "The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.",
-//     "status": "open",
-//     "labels": [
-//       "bug",
-//       "help wanted"
-//     ],
-//     "priority": "high",
-//     "author": "john_doe",
-//     "assignee": "jane_smith",
-//     "createdAt": "2024-01-15T10:30:00Z",
-//     "updatedAt": "2024-01-15T10:30:00Z"
-//   }
-
 const displayAllInfo = (data) => {
 
 
     const allInfoContainer = document.getElementById('all-info-container');
 
-     if (data.priority == 'high') {
-            priorityText = 'HIGH';
-            classList = 'bg-[#FEECEC] text-[#EF4444]';
-        }
-        else if (data.priority == 'medium') {
-            priorityText = 'MEDIUM';
-            classList = 'bg-[#FFF6D1] text-[#F59E0B]';
-        }
-        else if (data.priority == 'low') {
-            priorityText = 'LOW';
-            classList = 'bg-[#EEEFF2] text-[#9CA3AF]';
-        }
-        
-    allInfoContainer.innerHTML = ` <div class="p-8">
+    allInfoContainer.innerHTML
+
+    if (data.priority == 'high') {
+        priorityText = 'HIGH';
+        classList = 'bg-[#FEECEC] text-[#EF4444]';
+    }
+    else if (data.priority == 'medium') {
+        priorityText = 'MEDIUM';
+        classList = 'bg-[#FFF6D1] text-[#F59E0B]';
+    }
+    else if (data.priority == 'low') {
+        priorityText = 'LOW';
+        classList = 'bg-[#EEEFF2] text-[#9CA3AF]';
+    }
+
+    allInfoContainer.innerHTML = ` <div class="px-5 py-2">
 
                         <div class="space-y-4">
                             <h2 class="font-bold text-2xl text-[#1F2937]">${data.title}</h2>
@@ -137,7 +156,7 @@ const displayAllInfo = (data) => {
                         <div class="bg-[#F8FAFC] flex justify-between p-4 gap-2.5 rounded-2xl">
                             <div class="space-y-2">
                                 <div class="text-[#64748B] font-normal text-base">Assignee:</div>
-                                <div class="font-bold text-[#1F2937]">${data.assignee? data.assignee : "Not Found!"}</div>
+                                <div class="font-bold text-[#1F2937]">${data.assignee ? data.assignee : "Not Found!"}</div>
                             </div>
 
                             <div class="space-y-2">
@@ -169,12 +188,11 @@ const displayIssues = (datalist) => {
 
     datalist.forEach(data => {
 
-
         const card = document.createElement('div');
 
         const StatusIsOpen = data.status == 'open';
 
-        card.className = `bg-white rounded-lg border-t-4 border-[#${StatusIsOpen ? "00A96E" : "A855F7"}] shadow-lg cursor-pointer`;
+        card.className = `bg-white rounded-lg border-t-6 border-[#${StatusIsOpen ? "00A96E" : "A855F7"}] shadow-lg cursor-pointer`;
 
 
         if (data.priority == 'high') {
@@ -230,12 +248,9 @@ const displayIssues = (datalist) => {
 
 
         issueContainer.append(card);
-
     });
 
 }
-
-
 
 loadIssues();
 
