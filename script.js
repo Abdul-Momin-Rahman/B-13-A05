@@ -32,6 +32,22 @@ const hideSpinner = () => {
     Spinner.classList.add('hidden');
 }
 
+const searchIssue = ()=> {
+
+    const inputSearch = document.getElementById('input-search');
+    const input = inputSearch.value.trim().toLowerCase();
+
+    const issueCount = document.getElementById('issue-count');
+    
+    const searchUrl = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${input}`;
+    fetch(searchUrl)
+    .then(response => response.json())
+    .then(results => {
+        displayIssues(results.data)
+        issueCount.innerText = results.data.length; 
+    }) 
+}
+
 const loadIssues = async () => {
     showSpinner();
     const response = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
@@ -75,7 +91,7 @@ const changingTabs = (clickedBtn) => {
             displayIssues(openIssue);
             issueCount.innerText = openIssue.length;
             hideSpinner();
-        }, 2000);
+        }, 1000);
     }
     else if (clickedBtn.innerText == 'Closed') {
         showSpinner();
@@ -84,7 +100,7 @@ const changingTabs = (clickedBtn) => {
             displayIssues(closedIssue);
             issueCount.innerText = closedIssue.length;
             hideSpinner();
-        }, 2000);
+        }, 1000);
     }
     else if (clickedBtn.innerText == 'All') {
         showSpinner();
@@ -93,7 +109,7 @@ const changingTabs = (clickedBtn) => {
             displayIssues(AllIssue);
             issueCount.innerText = AllIssue.length;
             hideSpinner();
-        }, 2000);
+        }, 1000);
     }
 
 }
