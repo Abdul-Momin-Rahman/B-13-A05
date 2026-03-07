@@ -33,23 +33,23 @@
 
     <header>
         <nav>
-            <div class="navbar bg-base-100 shadow-sm lg:px-20 py-4">
+            <div class="navbar bg-base-100 shadow-sm px-2 lg:px-20 py-4">
                 <div class="flex-1">
-                    <a class="btn btn-ghost text-lg md:text-2xl text-[#1F2937] font-semibold px-0"><img class="w-9"
+                    <a class="btn btn-ghost text-xl md:text-2xl text-[#1F2937] font-semibold px-0"><img class="w-9"
                             src="./assets/github-logo.png" alt="">GitHub Issues Tracker</a>
                 </div>
                 <div class="flex gap-4">
                     <label class="input">
-                        <svg class="h-4 opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <svg class="h-3 md:h-4 opacity-50 w-3 md:w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
                                 stroke="currentColor">
                                 <circle cx="11" cy="11" r="8"></circle>
                                 <path d="m21 21-4.3-4.3"></path>
                             </g>
                         </svg>
-                        <input type="search" class="grow" placeholder="Search issues..." />
+                        <input type="search" class="w-15 md:w-full" placeholder="Search issues..." />
                     </label>
-                    <button class="btn  btn-primary font-semibold text-white">Search</button>
+                    <button class="btn  btn-primary text-xs md:text-base font-semibold text-white">Search</button>
                 </div>
             </div>
         </nav>
@@ -62,11 +62,11 @@
             <!-- tabs -->
             <div class="p-2 lg:p-6 bg-white shadow-xs flex justify-center lg:justify-start gap-2 mb-4 rounded-xl">
                 <button onclick="changingTabs(this)"
-                    class="tabButton btn btn-primary px-3 py-2 font-semibold w-30">All</button>
+                    class="tabButton btn btn-primary px-3 py-2 font-semibold w-20 md:w-30">All</button>
                 <button onclick="changingTabs(this)"
-                    class="tabButton btn btn-outline px-3 py-2 font-semibold w-30">Open</button>
+                    class="tabButton btn btn-outline px-3 py-2 font-semibold w-20 md:w-30">Open</button>
                 <button onclick="changingTabs(this)"
-                    class="tabButton btn btn-outline px-3 py-2 font-semibold w-30">Closed</button>
+                    class="tabButton btn btn-outline px-3 py-2 font-semibold w-20 md:w-30">Closed</button>
             </div>
 
             <!-- Below the tab -->
@@ -83,9 +83,9 @@
                         </div>
 
                         <div>
-                            <h1 class="text-xl text-[#1F2937] font-semibold"><span id="issue-count">50</span> Issues
+                            <h1 class="text-sm md:text-xl text-[#1F2937] font-semibold"><span id="issue-count">50</span> Issues
                             </h1>
-                            <p class="text-[#64748B]">Track and manage your project issues</p>
+                            <p class="text-[#64748B] text-xs md:text-base">Track and manage your project issues</p>
                         </div>
 
                     </div>
@@ -94,12 +94,12 @@
 
                         <div class="flex gap-2 justify-center items-center">
                             <div class="bg-[#00A96E] rounded-full w-3 h-3"></div>
-                            <p class="text-[#1F2937] font-medium">Open</p>
+                            <p class="text-[#1F2937] text-sm md:text-base font-medium">Open</p>
                         </div>
 
                         <div class="flex gap-2 justify-center items-center">
                             <div class="bg-[#A855F7] rounded-full w-3 h-3"></div>
-                            <p class="text-[#1F2937] font-medium">Closed</p>
+                            <p class="text-[#1F2937] text-sm md:text-base font-medium">Closed</p>
                         </div>
 
                     </div>
@@ -112,7 +112,7 @@
 
             <!-- all issues -->
             <div id="issues-container"
-                class="p-2 lg:p-6 bg-[#FBFBFB] rounded-b-xl shadow-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                class="p-2 lg:p-6 bg-[#FBFBFB] rounded-b-xl shadow-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-3 lg:gap-5">
 
                 <div id="card" class=" bg-white rounded-lg border-t-4 border-[#00A96E] shadow-lg">
 
