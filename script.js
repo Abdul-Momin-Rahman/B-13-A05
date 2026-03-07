@@ -37,16 +37,24 @@ const searchIssue = () => {
     const inputSearch = document.getElementById('input-search');
     const input = inputSearch.value.trim().toLowerCase();
 
-    const issueCount = document.getElementById('issue-count');
+    if(input.length > 0){
 
-    const searchUrl = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${input}`;
-    fetch(searchUrl)
-        .then(response => response.json())
-        .then(results => {
-            removeActive()
-            displayIssues(results.data)
-            issueCount.innerText = results.data.length;
-        })
+        const issueCount = document.getElementById('issue-count');
+    
+        const searchUrl = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${input}`;
+
+        fetch(searchUrl)
+            .then(response => response.json())
+            .then(results => {
+                removeActive()
+                displayIssues(results.data)
+                issueCount.innerText = results.data.length;
+            })
+    }
+    else{
+        alert('Search Box is Empty, Try again!')
+    }
+
 }
 
 const loadIssues = async () => {
